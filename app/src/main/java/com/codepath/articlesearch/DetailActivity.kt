@@ -1,38 +1,48 @@
 package com.codepath.articlesearch
 
 import android.os.Bundle
-import android.widget.ImageView
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+
 
 private const val TAG = "DetailActivity"
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var mediaImageView: ImageView
-    private lateinit var titleTextView: TextView
-    private lateinit var bylineTextView: TextView
-    private lateinit var abstractTextView: TextView
 
+    private lateinit var db: AppDatabase
+    private lateinit var foodDao: FoodDAO
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        mediaImageView = findViewById(R.id.mediaImage)
-        titleTextView = findViewById(R.id.mediaTitle)
-        bylineTextView = findViewById(R.id.mediaByline)
-        abstractTextView = findViewById(R.id.mediaAbstract)
 
-        val article = intent.getSerializableExtra(ARTICLE_EXTRA) as Article
+        val saveBtn = findViewById<Button>(R.id.saveButton)
+        db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "food-db").build()
+        foodDao = db.foodDao()
 
-        // Set title and abstract information for the article
-        titleTextView.text = article.headline?.main
-        bylineTextView.text = article.byline?.original
-        abstractTextView.text = article.abstract
+        val foodNameTextView: TextView = findViewById(R.id.foodText)
+        val caloriesTextView: TextView = findViewById(R.id.calText)
 
-        // Load the media image
-        Glide.with(this)
-            .load(article.mediaImageUrl)
-            .into(mediaImageView)
-    }
+        saveBtn.setOnClickListener{
+            Toast.makeText(applicationContext, "Clicked", Toast.LENGTH_SHORT).show()
+            val newFoodEntity = FoodEntity(
+                foodNameTextView.text.toString(),
+                caloriesTextView.text.toString()
+            )
+            lifecycleScope.launch(IO) {
+                (application as FoodApplication).db.foodDao().insert(newFoodEntity)
+            }
+
+
+            foodNameTextView.setText("")
+
+            caloriesTextView.setText("")
+        }
+      }
 }
