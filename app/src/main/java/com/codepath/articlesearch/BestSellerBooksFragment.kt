@@ -23,15 +23,9 @@ import org.json.JSONObject
 // CHANGE THIS TO BE YOUR API KEY  //
 // --------------------------------//
 private const val API_KEY = BuildConfig.API_KEY
-/*
- * The class for the only fragment in the app, which contains the progress bar,
- * recyclerView, and performs the network calls to the NY Times API.
- */
+
 class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
 
-    /*
-     * Constructing the view
-     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
