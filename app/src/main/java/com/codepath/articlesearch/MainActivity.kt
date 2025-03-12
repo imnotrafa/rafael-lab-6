@@ -20,9 +20,9 @@ fun createJson() = Json {
 }
 
 private const val TAG = "MainActivity/"
-private const val SEARCH_API_KEY = "K0CfoRRVUXj2USqXKdacAFAZtlWT7oJ8"
+private const val SEARCH_API_KEY = BuildConfig.API_KEY
 private const val ARTICLE_SEARCH_URL =
-    "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=Q8gEg3pDJWMcOfbxGo1HjqY96ogXXIRG"
+    "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${BuildConfig.API_KEY}"
 
 class MainActivity : AppCompatActivity() {
     private val articles = mutableListOf<Article>()
