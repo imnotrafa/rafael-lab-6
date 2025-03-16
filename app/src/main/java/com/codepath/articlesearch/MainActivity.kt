@@ -2,27 +2,16 @@ package com.codepath.articlesearch
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codepath.articlesearch.databinding.ActivityMainBinding
-import com.codepath.asynchttpclient.AsyncHttpClient
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
-import okhttp3.Headers
-import org.json.JSONException
 
-fun createJson() = Json {
-    isLenient = true
-    ignoreUnknownKeys = true
-    useAlternativeNames = false
-}
+
 
 private const val TAG = "MainActivity/"
 
@@ -32,6 +21,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var articlesRecyclerView: RecyclerView
     private lateinit var binding: ActivityMainBinding
 
+    object GlobalData {
+        var totalCalories: Int = 0
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,35 +33,48 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        articlesRecyclerView = findViewById(R.id.foodList)
-        val articleAdapter = ArticleAdapter(this, articles)
-        articlesRecyclerView.adapter = articleAdapter
-        articlesRecyclerView.layoutManager = LinearLayoutManager(this).also {
-            val dividerItemDecoration = DividerItemDecoration(this, it.orientation)
-            articlesRecyclerView.addItemDecoration(dividerItemDecoration)
-        }
-
+        val FoodFragment : Fragment = FoodFragment()
+        val RickRollFragment : Fragment = RickRoll()
+        val SummaryFragment : Fragment = SummaryFragment()
         val addFoodBtn = findViewById<Button>(R.id.addFood)
-        val saveBtn = findViewById<Button>(R.id.saveButton)
+
+        val bottomNavigationView : BottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            lateinit var fragment: Fragment
+            when (item.itemId) {
+                R.id.nav_sum -> fragment = SummaryFragment
+                R.id.nav_food -> fragment = FoodFragment
+                R.id.nav_rick -> fragment = RickRollFragment
+            }
+            replaceFragment(fragment)
+            true
+        }
 
         lifecycleScope.launch {
             (application as FoodApplication).db.foodDao().getAll().collect { databaseList ->
                 databaseList.map { entity ->
                     DisplayFood(
                         entity.food_name,
-                        entity.food_calories,
+                        entity.food_calories.toString(),
                     )
-                }.also { mappedList ->
-                    articles.clear()
-                    articles.addAll(mappedList)
-                    articleAdapter.notifyDataSetChanged()
                 }
             }
         }
+
 
         addFoodBtn.setOnClickListener {
             val intent = Intent(this, DetailActivity::class.java)
             startActivity(intent)
         }
+
+
+
+    }
+    private fun replaceFragment(articleListFragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, articleListFragment)
+        fragmentTransaction.commit()
     }
 }

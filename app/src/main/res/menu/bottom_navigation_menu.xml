@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_food"
+        android:icon="@drawable/food_list_24"
+        android:title="Food List" />
+
+    <item
+        android:id="@+id/nav_sum"
+        android:icon="@drawable/daily_summary_24"
+        android:title="Daily Summary" />
+
+    <item
+        android:id="@+id/nav_rick"
+        android:icon="@drawable/rick_roll_24"
+        android:title="RickRoll" />
+</menu>

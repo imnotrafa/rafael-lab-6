@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
+import com.codepath.articlesearch.MainActivity.GlobalData
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
@@ -14,7 +15,9 @@ import kotlinx.coroutines.launch
 private const val TAG = "DetailActivity"
 
 class DetailActivity : AppCompatActivity() {
-
+    fun addFoodCalories(calories: String) {
+        GlobalData.totalCalories += calories.toInt()
+    }
     private lateinit var db: AppDatabase
     private lateinit var foodDao: FoodDAO
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +31,7 @@ class DetailActivity : AppCompatActivity() {
 
         val foodNameTextView: TextView = findViewById(R.id.foodText)
         val caloriesTextView: TextView = findViewById(R.id.calText)
+        var totalCalories = MainActivity.GlobalData.totalCalories
 
         saveBtn.setOnClickListener{
             Toast.makeText(applicationContext, "Clicked", Toast.LENGTH_SHORT).show()
@@ -35,6 +39,7 @@ class DetailActivity : AppCompatActivity() {
                 foodNameTextView.text.toString(),
                 caloriesTextView.text.toString()
             )
+            addFoodCalories(caloriesTextView.text.toString())
             lifecycleScope.launch(IO) {
                 (application as FoodApplication).db.foodDao().insert(newFoodEntity)
             }

@@ -15,4 +15,7 @@ interface FoodDAO {
 
     @Query("DELETE FROM food_table")
     fun deleteAll()
+
+//    @Query("SELECT SUM(CAST(calories AS INT)) FROM food_table")
+//    suspend fun getTotalCalories(): Int
 }
