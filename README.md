@@ -10,9 +10,9 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is completed:
 
-- [ ] **Use at least 2 Fragments**
-- [ ] **Create a new dashboard fragment where users can see a summary of their entered data**
-- [ ] **Use one of the Navigation UI Views (BottomNavigation, Drawer Layout, Top Bar) to move between the fragments**
+- [X] **Use at least 2 Fragments**
+- [X] **Create a new dashboard fragment where users can see a summary of their entered data**
+- [x] **Use one of the Navigation UI Views (BottomNavigation, Drawer Layout, Top Bar) to move between the fragments**
 
 The following **optional** features are implemented:
 
