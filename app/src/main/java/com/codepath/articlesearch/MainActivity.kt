@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         val FoodFragment : Fragment = FoodFragment()
-        val RickRollFragment : Fragment = RickRoll()
+        val DanceFragement : Fragment = Dance()
         val SummaryFragment : Fragment = SummaryFragment()
         val addFoodBtn = findViewById<Button>(R.id.addFood)
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_sum -> fragment = SummaryFragment
                 R.id.nav_food -> fragment = FoodFragment
-                R.id.nav_rick -> fragment = RickRollFragment
+                R.id.nav_rick -> fragment = DanceFragement
             }
             replaceFragment(fragment)
             true

@@ -5,19 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.ContentLoadingProgressBar
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
-private const val TAG = "RickRollFragment"
-class RickRoll : Fragment() {
+private const val TAG = "DanceFragment"
+class Dance : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,8 +28,8 @@ class RickRoll : Fragment() {
 
 
     companion object {
-        fun newInstance(): RickRoll {
-            return RickRoll()
+        fun newInstance(): Dance {
+            return Dance()
         }
     }
 }
