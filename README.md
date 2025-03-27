@@ -27,7 +27,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='[https://imgur.com/a/LIOV8lo](https://imgur.com/a/LIOV8lo)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='cursorful-video-1743043985543.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
