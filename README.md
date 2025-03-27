@@ -1,6 +1,6 @@
 # Android Project 6 - *Name of App Here*
 
-Submitted by: **Your Name Here**
+Submitted by: **Rafael Abreu**
 
 **Name of your app** is a health metrics app that allows users to track ... [TODO] 
 
@@ -27,7 +27,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/cQWaURX.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/a/LIOV8lo' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
